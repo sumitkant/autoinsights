@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import json
+import json, os
 from libs.openai_requests import get_completion
 from libs.json_to_image import generate_post
 
@@ -53,20 +53,44 @@ def app():
         c1, c2, c3 = st.columns((2, 2, 2))
         title = c1.text_input('Title', response['title'])
         subtitle = c1.text_input('Subtitle', response['subtitle'])
-        description = c1.text_area('Description', response['description'], height=365)
-        cc1, cc2, cc3 = c2.columns(3)
-        bg_color = cc1.color_picker(f'Background Color', value='#000000')
-        text_color = cc2.color_picker(f'Text Color', value='#ffffff')
-        heading_color = cc3.color_picker(f'Heading Color', value='#ffffff')
-        hashtag = c2.text_input('Hashtag', value=FIELD)
-        caption = c2.text_area('Caption', response['caption_text'], height=150)
-        hashtags = c2.text_area('Hashtags', ', '.join([f'#{x.lower()}' for x in response['caption_hashtags']]), height=140)
+        hashtag = c1.text_input('Hashtag', value=FIELD)
+        description = c1.text_area('Description', response['description'], height=180)
+        cc1, cc2, cc3 = c3.columns(3)
+        palettes = {
+            'Psych Lab (Dark)': ['#545454', '#ffffff', '#31BD93'],
+            'Psych Lab (Light)': ['#ffffff', '#545454', '#31BD93'],
+            'Study Lab (Dark)': ['#000000', '#ffffff', '#FFBD59'],
+            'Study Lab (Light)': ['#ffffff', '#000000', '#FFBD59'],
+            'Design Lab (Light)': ['#ffffff', '#545454', '#DF207A']
+        }
+        palette = c2.selectbox('Color Palette', palettes.keys())
+        bg_color = cc1.color_picker(f'Background Color', value=palettes[palette][0])
+        text_color = cc2.color_picker(f'Text Color', value=palettes[palette][1])
+        heading_color = cc3.color_picker(f'Heading Color', value=palettes[palette][2])
 
+        caption = c2.text_area('Caption', response['caption_text'], height=350)
+        hashtags = c1.text_area('Hashtags', ', '.join([f'#{x.lower()}' for x in response['caption_hashtags']]), height=140)
+        cp1, cp2 = c2.columns(2)
+        aspect_ratios = {'square': (1, 1), 'long': (1, 1.25)}
+        ar = cp1.selectbox('Aspect Ratio:', aspect_ratios.keys())
+        fonts = os.listdir('assets/fonts')
+        font = cp2.selectbox('Font', fonts, 1)
         print('Generating Image')
 
-        img = generate_post(title, subtitle, description, color=bg_color,
-                            width=2160, aspect_ratio=(1, 1), hashtag=hashtag, textcolor=text_color,
-                            heading_color=heading_color)
+        body_font_size = cp1.slider('Font Size', 10, 100, 85, 5)
+        wrap = cp2.slider('Wrap Text', 5, 50, 20, 1)
 
+
+        img = generate_post(title, subtitle, description,
+                            color=bg_color,
+                            width=2160,
+                            aspect_ratio=(aspect_ratios[ar]),
+                            hashtag=hashtag,
+                            textcolor=text_color,
+                            heading_color=heading_color,
+                            font=font,
+                            wrap=wrap,
+                            body_font_size=body_font_size
+                            )
         c3.image(img)
 
