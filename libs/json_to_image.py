@@ -6,7 +6,8 @@ pals1 = ['#eb3b5a', '#fa8231', '#f7b731', '#20bf6b', '#0fb9b1', '#eb3b5a', '#fa8
 pals2 = ['#2d98da', '#3867d6', '#8854d0', '#a5b1c2', '#4b6584', '#2d98da', '#3867d6', '#8854d0', '#a5b1c2', '#4b6584']
 
 @st.cache_data
-def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1, 1), num='212', textcolor='white'):
+def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1, 1), num='212',
+                  textcolor='white', heading_color='#31BD93'):
     heading_font_path = "assets/BOLD.OTF"
     body_font_path = "assets/REGULAR.OTF"
     logo_font_path = 'assets/logo_font.ttf'
@@ -26,7 +27,7 @@ def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1
     y = margin
     for line in heading_lines:
         with Pilmoji(image) as pilmoji:
-            pilmoji.text((margin, y), line, font=heading_font, fill='#31BD93')
+            pilmoji.text((margin, y), line, font=heading_font, fill=heading_color)
             y += heading_font_size + line_spacing
 
     # draw content
@@ -42,15 +43,11 @@ def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1
     page_number = f'{num}'
     page_number_width, page_number_height = draw.textsize(page_number, font=body_font)
     draw.text((w - margin - page_number_width, h - margin - body_font_size), page_number,
-              font=body_font, fill=textcolor)
+              font=body_font, fill=heading_color)
 
     # logo font
     logo_font = ImageFont.truetype(logo_font_path, int(body_font_size*0.75))
-    draw.text((margin, h - margin*1.25 - body_font_size), 'Johnny\'s', font=logo_font, fill="#31BD93")
-
-    # Save the image
-    # with Pilmoji(image) as pilmoji:/
-    #     pilmoji.text((10, 10), my_string.strip(), (0, 0, 0), font)
+    draw.text((margin, h - margin*1.25 - body_font_size), 'Johnny\'s', font=logo_font, fill=heading_color)
 
     image.save(f"images/card_{num}.png")
 
@@ -58,7 +55,8 @@ def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1
 
 
 @st.cache_data
-def generate_post(heading, subtitle, content, color='#000000', width=2160, aspect_ratio=(1, 1), hashtag='212', textcolor='white'):
+def generate_post(heading, subtitle, content, color='#000000', width=2160, aspect_ratio=(1, 1), hashtag='212',
+                  textcolor='white', heading_color='31BD93'):
     heading_font_path = "assets/BOLD.OTF"
     body_font_path = "assets/REGULAR.OTF"
     logo_font_path = 'assets/logo_font.ttf'
@@ -88,7 +86,7 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
     y += int(margin/4)
     for line in heading_lines:
         with Pilmoji(image) as pilmoji:
-            pilmoji.text((margin, y), line, font=heading_font, fill='#31BD93')
+            pilmoji.text((margin, y), line, font=heading_font, fill=heading_color)
             y += heading_font_size + line_spacing
 
     # draw content
@@ -100,24 +98,22 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
             pilmoji.text((margin, y), line, font=body_font, fill=textcolor)
             y += body_font_size + line_spacing
 
-    # draw hashtag
-    page_number = f'{hashtag}'
-    page_number_width, page_number_height = draw.textsize(page_number, font=body_font)
-    draw.text((w - margin - page_number_width, h - margin - body_font_size), page_number,
-              font=body_font, fill=textcolor)
+    # draw logo (bottom right)
+    logo_font_size = int(body_font_size*0.75)
+    logo_font = ImageFont.truetype(logo_font_path, logo_font_size)
+    logo_width, logo_height = draw.textsize('Johnny\'s', font=logo_font)
+    draw.text((w - margin - logo_width, h - margin*1.35 - logo_font_size), 'Johnny\'s',
+              font=logo_font, fill=heading_color)
 
-    # logo font
-    logo_font = ImageFont.truetype(logo_font_path, int(body_font_size*0.75))
-    draw.text((margin, h - margin*1.25 - body_font_size), 'Johnny\'s', font=logo_font, fill="#31BD93")
+    # draw hashtag (bottom left)
+    hashtag_font_size = int(body_font_size * 0.6)
+    hashtag = f'{hashtag}'.upper()
+    hashtag_font = ImageFont.truetype(body_font_path, hashtag_font_size)
+    draw.text((margin, h - margin - hashtag_font_size), hashtag, font=hashtag_font, fill=heading_color)
 
-    # Save the image
-    # with Pilmoji(image) as pilmoji:/
-    #     pilmoji.text((10, 10), my_string.strip(), (0, 0, 0), font)
-
-    image.save(f"images/post.png")
-
+    # image.save(f"images/post.png")
     print(f"Post created.")
-
+    return image
 
 
 @st.cache_data
