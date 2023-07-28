@@ -32,6 +32,7 @@ if authentication_status:
     authenticator.logout('Logout', 'main')
     st.write(f'Welcome *{name.split(" ")[0]}*')
     # Headings
+    st.markdown('---')
     st.subheader(':warning: :warning: :warning: Using Paid API KEY!!! :warning: :warning: :warning:')
     st.subheader('Tools')
 

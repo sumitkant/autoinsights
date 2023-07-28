@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import json, os
 from libs.openai_requests import get_completion
-from libs.json_to_image import generate_post
+from libs import generate_post
+
 
 def app():
 
@@ -59,8 +60,8 @@ def app():
         palettes = {
             'Psych Lab (Dark)': ['#545454', '#ffffff', '#31BD93'],
             'Psych Lab (Light)': ['#ffffff', '#545454', '#31BD93'],
-            'Study Lab (Dark)': ['#000000', '#ffffff', '#FFBD59'],
-            'Study Lab (Light)': ['#ffffff', '#000000', '#FFBD59'],
+            'Study Lab (Dark)': ['#000000', '#ffffff', '#FF914D'],
+            'Study Lab (Light)': ['#ffffff', '#000000', '#FF914D'],
             'Design Lab (Light)': ['#ffffff', '#545454', '#DF207A']
         }
         palette = c2.selectbox('Color Palette', palettes.keys())
@@ -77,20 +78,22 @@ def app():
         font = cp2.selectbox('Font', fonts, 1)
         print('Generating Image')
 
-        body_font_size = cp1.slider('Font Size', 10, 100, 85, 5)
-        wrap = cp2.slider('Wrap Text', 5, 50, 20, 1)
+        # body_font_size = cp1.slider('Font Size', 10, 100, 85, 5)
+        # wrap = cp2.slider('Wrap Text', 5, 50, 20, 1)
 
-
-        img = generate_post(title, subtitle, description,
-                            color=bg_color,
-                            width=2160,
-                            aspect_ratio=(aspect_ratios[ar]),
-                            hashtag=hashtag,
-                            textcolor=text_color,
-                            heading_color=heading_color,
-                            font=font,
-                            wrap=wrap,
-                            body_font_size=body_font_size
-                            )
+        img = generate_post.generate_post(
+            title,
+            subtitle,
+            description,
+            color=bg_color,
+            width=2160,
+            aspect_ratio=(aspect_ratios[ar]),
+            hashtag=hashtag,
+            textcolor=text_color,
+            heading_color=heading_color,
+            font=font,
+            #wrap=wrap,
+            #body_font_size=body_font_size
+            )
         c3.image(img)
 

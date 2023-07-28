@@ -5,9 +5,9 @@ credentials:
       name: Sumit Kant
       password: $2b$12$GUAxiYTWuNqDEH2Zdg8q2eMiCrkdQ8oJOxSLYcHcxacpd8BLs78Zu
 cookie:
-  expiry_days: 30
-  key: random_signature_key # Must be string
-  name: random_cookie_name
+  expiry_days: 0
+  key: q2eMiCrkdQacpd8
+  name: g8q2eQ8oJOb$12$GU
 preauthorized:
   emails:
   - sumitkant@iiml.org
