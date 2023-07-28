@@ -24,7 +24,7 @@ def app():
     Please ignore all previous instructions. Please respond only in English Language.
     Act as an expert researcher with 20+ years in generating hard to find insights in the subject of {FIELD}. 
     You have a large fan following on instagram page that posts content about {FIELD}. 
-    Generate an instagram post about the "{TOPIC}" to be shared on instagram for people who are new to {FIELD}.
+    Generate an instagram post about the #### {TOPIC} #### to be shared on instagram for people who are new to {FIELD}.
     Use distinct emojis in the description and caption. 
     Use a {TONE} tone of voice and {WRITING_STYLE} writing style. 
     Use an example or an analogy as appropriate to explain the given topic. 
@@ -70,7 +70,7 @@ def app():
         heading_color = cc3.color_picker(f'Heading Color', value=palettes[palette][2])
 
         caption = c2.text_area('Caption', response['caption_text'], height=350)
-        hashtags = c1.text_area('Hashtags', ', '.join([f'#{x.lower()}' for x in response['caption_hashtags']]), height=140)
+        hashtags = c1.text_area('Hashtags', ' '.join([f'#{x.lower()}' for x in response['caption_hashtags']]), height=140)
         cp1, cp2 = c2.columns(2)
         aspect_ratios = {'square': (1, 1), 'long': (1, 1.25)}
         ar = cp1.selectbox('Aspect Ratio:', aspect_ratios.keys())
