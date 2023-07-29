@@ -76,6 +76,7 @@ def app():
         ar = cp1.selectbox('Aspect Ratio:', aspect_ratios.keys())
         fonts = os.listdir('assets/fonts')
         font = cp2.selectbox('Font', fonts, 1)
+        lab = c2.text_input('Channel', value='PSYCH LAB')
         print('Generating Image')
 
         # body_font_size = cp1.slider('Font Size', 10, 100, 85, 5)
@@ -93,7 +94,8 @@ def app():
             heading_color=heading_color,
             font=font,
             #wrap=wrap,
-            #body_font_size=body_font_size
+            #body_font_size=body_font_size,
+            lab=lab
             )
         c3.image(img)
 
