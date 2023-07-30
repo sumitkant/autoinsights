@@ -9,9 +9,10 @@ pals2 = ['#2d98da', '#3867d6', '#8854d0', '#a5b1c2', '#4b6584', '#2d98da', '#386
 @st.cache_data
 def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1, 1), num='212',
                   textcolor='white', heading_color='#31BD93', font='Default'):
-    heading_font_path = glob(f"assets/fonts/{font}/bold*")
-    body_font_path = glob(f"assets/fonts/{font}/regular*")
-    logo_font_path = 'assets/logo_font.ttf'
+    heading_font_path = glob(f"assets/fonts/{font}/bold*")[0]
+    body_font_path = glob(f"assets/fonts/{font}/regular*")[0]
+    logo_font_path = 'assets/fonts/Logo/regular.ttf'
+    logo_font_path2 = 'assets/fonts/Logo/nourd_bold.ttf'
     w, h = width, int(width*aspect_ratio[1]/aspect_ratio[0])
     heading_font_size = int(w / 12)
     body_font_size = int(w / 25)
@@ -50,9 +51,10 @@ def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1
     logo_font = ImageFont.truetype(logo_font_path, int(body_font_size*0.75))
     draw.text((margin, h - margin*1.25 - body_font_size), 'Johnny\'s', font=logo_font, fill=heading_color)
 
-    image.save(f"images/card_{num}.png")
+    # image.save(f"images/card_{num}.png")
 
     print(f"Image {num} created.")
+    return image
 
 
 
