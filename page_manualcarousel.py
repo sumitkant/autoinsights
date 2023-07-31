@@ -1,58 +1,84 @@
 import json
 import streamlit as st
-from glob import glob
+import pandas as pd
 from libs.openai_requests import get_completion
-from libs.json_to_image import generate_info_cards, generate_title_cards
+from libs.json_to_image import generate_card
 
-
-# Page Layout
-# st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-
-# Headings
-# st.title(':rocket: Fragments.ai :rocket:')
-# st.write('Made with :blue_heart: & :brain: by [Sumit Kant](https://www.sumitkant.com/)')
-# st.subheader(':warning: :warning: :warning: Using Paid API KEY!!! :warning: :warning: :warning:')
-# st.markdown('---')
 def app():
     st.header('Manual Carousel')
-    c1, c2, c3, c4 = st.columns(4)
+    tones = pd.read_csv('templates/tones.csv', header=None)[0].values
+    tones = [x.strip() for x in tones]
+    styles = pd.read_csv('templates/writingstyles.csv', header=None)[0].values
+    styles = [x.strip() for x in styles]
 
-    NUMCARDS = c1.slider('Number of Cards:', 1, 10, 5)
+    c1, c2 = st.columns((1, 2))
+    TONE = c1.selectbox('Tone of Voice', tones, 7)
+    WRITING_STYLE = c1.selectbox('Writing Style', styles, 11)
+    FIELD = c1.text_input('Field', value='Psychology')
     TOPIC = c2.text_input('Topic')
-    ATTHERATE = c3.text_input('@')
-    logos = glob('assets/logos/*.png')
-    LOGO = c4.selectbox('Logo:', logos)
+    SLIDES = c1.slider('Number of Slides:', 1, 10, 5)
 
+    delimiter = "####"
+    prompt_research = f"""\
+    Please respond only in English Language.
+    Act as an expert researcher with 20+ years in generating hard to find insights in the subject of {FIELD}. 
+    You have a large fan following on instagram page that posts content about {FIELD}. 
+    Use a {TONE} tone of voice and {WRITING_STYLE} writing style.
+    Given a topic delimited by the {delimiter}, generate an instagram carousel with exactly {SLIDES} slides
+    Each slide MUST be a JSON object with 3 ELEMENTS
+    "title": <appropriate title>, should be catchy, viral and short
+    "subtitle": <appropriate subtitle>, SHOULD BE MAX 7 WORDS LONG
+    "description": <explanation>, EXPLAIN IN SIMPLE TERMS IN 5 SENTENCES the title of that slide. Use distinct emojis.
+    Use an example or an analogy as appropriate to explain a slide.
+    the description MUST explain any technical term in parenthesis whenever used in MAX 7 words.
+    DO NOT REPEAT YOURSELF. Do not self-reference. 
+    Do not explain what you are doing. Do not explain what you are going to do.
+    generate your response in the form of a PYTHON LIST with each item being a slide.
+    The last two items in the list MUST BE a caption for instagram carousel. The caption should contain 10 additional
+    points about the topic WIHOUT USING ANY HASHTAGS.
+    The list item should a list at least 25 hashtags separated by comma.
+    PLEASE CHECK THE FORMAT FOR JSON OBJECT BEFORE GENERATING A RESPONSE. KEYS MUST BE IN DOUBLE QUOTES
+    The topic is #### {TOPIC} ####
+    """
+    c2.subheader('Paste this prompt into Bing AI or ChatGPT')
+    c2.write(prompt_research)
 
-    cols = st.columns(NUMCARDS+1)
-    TITLE = cols[0].text_input(f'Title')
-    SUBTITLE = cols[0].text_area(f'Subtitle', height=200)
-    bg_color = cols[0].color_picker(f'Background Color', value='#000000')
-    pals1 = ['#eb3b5a', '#fa8231', '#f7b731', '#20bf6b', '#0fb9b1', '#eb3b5a', '#fa8231', '#f7b731', '#20bf6b', '#0fb9b1']
+    st.subheader('Paste Output')
+    manual_input = st.text_area('Manual Input', height=300)
+    if manual_input:
+        manual_input = json.loads(manual_input)
+        slides = manual_input[:-2]
+        captions = manual_input[-2]
+        hashtags = manual_input[-1]
+    else:
+        slides = [{'title': 'Title', 'subtitle': 'subtitle', 'description': 'description'}] * SLIDES
+        captions = ''
+        hashtags = ''
 
-    edited_response = []
-    palette = []
-    for card, col in zip(range(NUMCARDS+1), cols):
-        if card == 0:
-            pass
-        else:
-            h = col.text_input(f'Heading{card}')
-            i = col.text_area(f'Insight{card}', height=200)
-            color = col.color_picker(f'Background Color{card}', value=pals1[card-1])
-            edited_response.append({'heading': h, 'insight': i, 'topic': TOPIC})
-            palette.append(color)
+    st.subheader('Carousel')
+    c1, c2 = st.columns(2)
+    c1.text_area('Captions', value=captions)
+    c2.text_area('Hashtags', value=hashtags)
+    palettes = {
+        'Psych Lab (Dark)': ['#545454', '#ffffff', '#31BD93'],
+        'Psych Lab (Light)': ['#ffffff', '#545454', '#31BD93'],
+        'Study Lab (Dark)': ['#000000', '#ffffff', '#FF914D'],
+        'Study Lab (Light)': ['#ffffff', '#000000', '#FF914D'],
+        'Design Lab (Light)': ['#ffffff', '#545454', '#DF207A'],
+        'Bluestone (Light)': ['#ffffff', '#004AAD', '#004AAD'],
+        'Bluestone (Dark)': ['#004AAD', '#ffffff', '#ffffff'],
+    }
+    palette = c1.selectbox('Color Palette', palettes.keys())
 
-    print(palette)
+    cols = st.columns(len(slides))
 
-    generate_info_cards(edited_response, palette)
-    generate_title_cards([TITLE], SUBTITLE, TOPIC, ATTHERATE, LOGO, factor=3, mgn=3, bg_color=bg_color, headingwrap=20)
-
-
-    headingURL = glob('images/heading_*.png')[0]
-    imageUrls = glob('images/card_*.png')[:NUMCARDS]
-    # cols = st.columns(len(imageUrls)+1)
-    cols[0].image(headingURL)
-    for i, url in enumerate(imageUrls):
-        cols[i+1].image(url)
-
-    st.write(edited_response)
+    for i, (slide, col) in enumerate(zip(slides, cols)):
+        h = col.text_input(f'Title {i + 1}', value=slide['title'])
+        s = col.text_input(f'Sub Title {i + 1}', value=slide['subtitle'])
+        c = col.text_area(f'Insight {i + 1}', height=400, value=slide['description'])
+        bg_color = col.color_picker(f'Background Color {i + 1}', value=palettes[palette][0])
+        text_color = col.color_picker(f'Text Color {i + 1}', value=palettes[palette][1])
+        heading_color = col.color_picker(f'Heading Color {i + 1}', value=palettes[palette][2])
+        img = generate_card(h, c, width=2160, aspect_ratio=(1, 1), num=i + 1,
+                            color=bg_color, textcolor=text_color, heading_color=heading_color)
+        col.image(img)

@@ -8,7 +8,6 @@ from libs.json_to_image import generate_info_cards, generate_title_cards, genera
 
 def app():
     st.header('AI Generated Carousel')
-    templates = ['Instagram Post', 'Instagram Carousel']
     tones = pd.read_csv('templates/tones.csv', header=None)[0].values
     tones = [x.strip() for x in tones]
     styles = pd.read_csv('templates/writingstyles.csv', header=None)[0].values
@@ -73,7 +72,9 @@ def app():
             'Bluestone (Dark)': ['#004AAD', '#ffffff', '#ffffff'],
         }
         palette = c1.selectbox('Color Palette', palettes.keys())
+
         cols = st.columns(len(slides))
+
         for i, (slide, col) in enumerate(zip(slides, cols)):
             h = col.text_input(f'Title {i+1}', value=slide['title'])
             s = col.text_input(f'Sub Title {+1}', value=slide['subtitle'])
@@ -81,36 +82,6 @@ def app():
             bg_color = col.color_picker(f'Background Color {i+1}', value=palettes[palette][0])
             text_color = col.color_picker(f'Text Color {i+1}', value=palettes[palette][1])
             heading_color = col.color_picker(f'Heading Color {i+1}', value=palettes[palette][2])
-            img = generate_card(h, c, color=bg_color, width=2160, aspect_ratio=(1, 1), num=i+1,
-                                textcolor=text_color, heading_color=heading_color)
+            img = generate_card(h, c,  width=2160, aspect_ratio=(1, 1), num=i+1,
+                                color=bg_color, textcolor=text_color, heading_color=heading_color)
             col.image(img)
-
-
-    #     # CREATE IMAGES FROM JSON
-    #     cols = st.columns(len(response_research))
-    #     pals1 = ['#eb3b5a', '#fa8231', '#f7b731', '#20bf6b', '#0fb9b1', '#eb3b5a', '#fa8231', '#f7b731', '#20bf6b', '#0fb9b1']
-    #     pals2 = ['#ffffff']*10
-    #
-    #     # POINTS = 5
-    #     edited_response = []
-    #     palette = []
-    #     for card, col in zip(range(len(response_research)), cols):
-    #         h = col.text_input(f'Heading{card}', value=response_research[card]['heading'])
-    #         c = col.text_area(f'Insight{card}', height=300, value=response_research[card]['content'])
-    #         color = col.color_picker(f'Background Color{card}', value=pals2[card-1])
-    #         edited_response.append({'heading': h, 'content': c, 'color': color})
-    #
-    #     # st.write(edited_response)
-    #
-    #     for card, col in zip(range(len(edited_response)), cols):
-    #         generate_card(edited_response[card]['heading'], edited_response[card]['content'],
-    #                       color=edited_response[card]['color'], width=2160, aspect_ratio=(1, 1), num=card+1, textcolor='#545454')
-    #         col.image(f'images/card_{card+1}.png')
-    #
-    #
-    # # Act as an expert in psychology and neuroscience which a large fan following on instagram. Given a topic, generate an instagram post content to be shared on instagram for people who are new to psychology. Use a friendly tone of voice and informative writing style. Use the following format for your response.
-    # # Title: <>
-    # # Subtitle: <>. SHOULD BE MAX 7 WORDS.
-    # # Description: <>. A 300 chracter description on the topic
-    # # Caption: A corresponding caption for the topic in 200 characters.
-    # # hashtags: <>. A list of about 20 hashtags to be used at the end of captions. ALL HASHTAGS should be in small letters
