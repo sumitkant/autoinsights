@@ -73,9 +73,9 @@ def app():
         hashtags = c1.text_area('Hashtags', ' '.join([f'#{x.lower()}' for x in response['caption_hashtags']]), height=140)
         cp1, cp2 = c2.columns(2)
         aspect_ratios = {'square': (1, 1), 'long': (1, 1.25)}
-        ar = cp1.selectbox('Aspect Ratio:', aspect_ratios.keys())
+        ar = cp1.selectbox('Aspect Ratio:', aspect_ratios.keys(), 1)
         fonts = os.listdir('assets/fonts')
-        font = cp2.selectbox('Font', fonts, 1)
+        font = cp2.selectbox('Font', fonts, 3)
         lab = c2.text_input('Channel', value='PSYCH LAB')
         print('Generating Image')
 

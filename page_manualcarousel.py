@@ -5,6 +5,7 @@ from libs.openai_requests import get_completion
 from libs.json_to_image import generate_card
 
 def app():
+
     st.header('Manual Carousel')
     tones = pd.read_csv('templates/tones.csv', header=None)[0].values
     tones = [x.strip() for x in tones]
