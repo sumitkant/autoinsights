@@ -35,7 +35,7 @@ def app():
     "title": <appropriate title>, should be catchy, viral and short
     "subtitle": <appropriate subtitle>, SHOULD BE MAX 7 WORDS LONG. MUST be a question
     "description": <explanation>, EXPLAIN IN SIMPLE TERMS IN 5 SENTENCES ABOUT {TOPIC}. NO HASHTAGS. SHOULD CONTAIN
-    APPROPRIATE EMOJIS
+    APPROPRIATE EMOJIS. Add appropriate breaks using the $ symbol in the description wherever necessary
     "caption_text": <Appropriate caption text>. Share 10 additional points about the topic. SHOULD ONLY CONTAIN TEXT. NO HASHTAGS.
     "caption_hashtags": ["hashtag1", "hashtag2", ... "hashtag25"]. MUST BE A LIST. MUST CONTAIN AT LEAST 25 HASHTAGS.
     """
@@ -59,6 +59,7 @@ def app():
         cc1, cc2, cc3 = c3.columns(3)
         palettes = {
             'Psych Lab (Dark)': ['#545454', '#ffffff', '#31BD93'],
+            'Psych Lab (Black)': ['#000000', '#ffffff', '#31BD93'],
             'Psych Lab (Light)': ['#ffffff', '#545454', '#31BD93'],
             'Study Lab (Dark)': ['#000000', '#ffffff', '#FF914D'],
             'Study Lab (Light)': ['#ffffff', '#000000', '#FF914D'],

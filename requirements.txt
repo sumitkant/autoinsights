@@ -2,3 +2,4 @@ streamlit
 openai
 Pilmoji
 streamlit-authenticator
+transformers

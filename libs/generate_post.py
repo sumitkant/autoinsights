@@ -45,12 +45,14 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
 
     # draw content
     body_font = ImageFont.truetype(body_font_path, body_font_size)
-    body_lines = textwrap.wrap(content, width=47)
-    y += int(margin / 3)
-    for line in body_lines:
-        with Pilmoji(image) as pilmoji:
-            pilmoji.text((margin, y), line, font=body_font, fill=textcolor)
-            y += body_font_size + line_spacing
+    print(content.split('\n'))
+    for c in content.split('\n'):
+        body_lines = textwrap.wrap(c.strip(), width=47)
+        y += int(margin / 3)
+        for line in body_lines:
+            with Pilmoji(image) as pilmoji:
+                pilmoji.text((margin, y), line, font=body_font, fill=textcolor)
+                y += body_font_size + line_spacing
 
     # draw logo (bottom right)
     logo_font_size = int(body_font_size*0.75)
