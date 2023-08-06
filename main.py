@@ -4,6 +4,7 @@ import page_manualcarousel
 import page_instagrampost
 import page_summarizetext
 import page_imagecaption
+import page_imagegeneration
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
@@ -43,8 +44,9 @@ if authentication_status:
         "AI Generated Carousel": page_aigeneratedcarousel,
         "Manual Carousel": page_manualcarousel,
         "AI Instagram Post": page_instagrampost,
-        "Text Summarization" : page_summarizetext,
-        "Image Captioning": page_imagecaption
+        "Text Summarization": page_summarizetext,
+        "Image Captioning": page_imagecaption,
+        "Image Generation": page_imagegeneration
     }
     selection = st.selectbox("", list(PAGES.keys()))
     st.markdown('---')

@@ -27,8 +27,10 @@ def app():
         result = get_completion(image)
         return result[0]['generated_text']
 
-
-    st.title('Image Caption')
+    st.title('Image Caption with 🤗Huggingface')
+    st.markdown('''
+    * Uses [Salesforce/blip-image-captioning-base model](https://huggingface.co/Salesforce/blip-image-captioning-base)
+    ''')
     uploads = st.file_uploader('Upload your image for captioning', type=['png', 'jpg'], accept_multiple_files=True)
 
     if uploads:
