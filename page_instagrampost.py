@@ -35,7 +35,7 @@ def app():
     "title": <appropriate title>, should be catchy, viral and short
     "subtitle": <appropriate subtitle>, SHOULD BE MAX 7 WORDS LONG. MUST be a question
     "description": <explanation>, EXPLAIN IN SIMPLE TERMS IN 5 SENTENCES ABOUT {TOPIC}. NO HASHTAGS. SHOULD CONTAIN
-    APPROPRIATE EMOJIS. Add appropriate breaks using the $ symbol in the description wherever necessary
+    APPROPRIATE EMOJIS.
     "caption_text": <Appropriate caption text>. Share 10 additional points about the topic. SHOULD ONLY CONTAIN TEXT. NO HASHTAGS.
     "caption_hashtags": ["hashtag1", "hashtag2", ... "hashtag25"]. MUST BE A LIST. MUST CONTAIN AT LEAST 25 HASHTAGS.
     """

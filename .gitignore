@@ -1,2 +1,3 @@
 .streamlit/secrets.toml
 _pycache_
+page_amazon_wishlist.py

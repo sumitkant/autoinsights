@@ -35,7 +35,7 @@ def app():
 
     if uploads:
         for img in uploads:
-            c1, c2 = st.columns((1,2))
+            c1, c2 = st.columns((1, 2))
             c1.image(img)
             i = str(base64.b64encode(img.getvalue()).decode('utf-8'))
             c2.header(caption(i))
