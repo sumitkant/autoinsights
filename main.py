@@ -5,6 +5,8 @@ import page_instagrampost
 import page_summarizetext
 import page_imagecaption
 import page_imagegeneration
+import page_pandasai
+import page_arxiv_summary
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
@@ -46,7 +48,8 @@ if authentication_status:
         "AI Instagram Post": page_instagrampost,
         "Text Summarization": page_summarizetext,
         "Image Captioning": page_imagecaption,
-        "Image Generation": page_imagegeneration
+        "Image Generation": page_imagegeneration,
+        "PandasAI": page_pandasai
     }
     selection = st.selectbox("", list(PAGES.keys()))
     st.markdown('---')
