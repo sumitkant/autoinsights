@@ -39,7 +39,7 @@ def app():
     "caption_text": <Appropriate caption text>. Share 10 additional points about the topic. SHOULD ONLY CONTAIN TEXT. NO HASHTAGS.
     "caption_hashtags": ["hashtag1", "hashtag2", ... "hashtag25"]. MUST BE A LIST. MUST CONTAIN AT LEAST 25 HASHTAGS.
     """
-
+    
     c2.subheader('Prompt')
     c2.write(prompt)
 
