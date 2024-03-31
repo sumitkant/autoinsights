@@ -45,6 +45,7 @@ def app():
 
     if TOPIC:
         print('Response from chatGPT')
+        # st.write(get_completion(prompt) )
         response = json.loads(get_completion(prompt))
         st.markdown('---')
         # st.write(response)
@@ -100,3 +101,4 @@ def app():
             )
         c3.image(img)
 
+app()

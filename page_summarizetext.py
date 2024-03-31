@@ -31,7 +31,8 @@ def app():
     API_URL = 'https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6'
     model_details = get_model_details(API_URL)
     c1.write(API_URL)
-    c1.image(model_details['cardData']['thumbnail'])
+    # c1.write(model_details)
+    #c1.image(model_details['cardData']['thumbnail'])
 
     c2.subheader('Text to Summarize')
     input = c2.text_area('Text', height=350, value=dummy_input)

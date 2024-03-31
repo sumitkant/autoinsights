@@ -2843,3 +2843,30 @@ result = analyze_data(dfs)
         ```
 2023-09-13 13:21:17 [INFO] Answer: {'type': 'plot', 'value': 'assets/downloads/pandasai/temp_chart.png'}
 2023-09-13 13:21:17 [INFO] Executed in: 16.817702770233154s
+2024-03-30 23:31:52 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:31:52 [INFO] Requesting page of results
+2024-03-30 23:31:53 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:33:43 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:33:43 [INFO] Requesting page of results
+2024-03-30 23:33:43 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:35:00 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:35:00 [INFO] Requesting page of results
+2024-03-30 23:35:01 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:35:36 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:35:36 [INFO] Requesting page of results
+2024-03-30 23:35:37 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:36:09 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:36:09 [INFO] Requesting page of results
+2024-03-30 23:36:10 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:36:15 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:36:15 [INFO] Requesting page of results
+2024-03-30 23:36:16 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:36:30 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:36:30 [INFO] Requesting page of results
+2024-03-30 23:36:31 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:36:47 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:36:47 [INFO] Requesting page of results
+2024-03-30 23:36:48 [INFO] Got first page; 1 of inf results available
+2024-03-30 23:38:39 [INFO] Requesting 100 results at offset 0
+2024-03-30 23:38:39 [INFO] Requesting page of results
+2024-03-30 23:38:40 [INFO] Got first page; 1 of inf results available

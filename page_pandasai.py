@@ -5,9 +5,6 @@ from pandasai.llm.openai import OpenAI
 from PIL import Image
 
 
-
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-
 def app():
     
     st.image('https://images.unsplash.com/photo-1617500756598-a0ee57567ac8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&h=300&q=80')
@@ -74,4 +71,3 @@ def app():
             st.session_state.messages.append(message)    
     
     
-app()

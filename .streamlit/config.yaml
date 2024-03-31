@@ -3,9 +3,9 @@ credentials:
     sumitkant:
       email: sumitkant@iiml.org
       name: Sumit Kant
-      password: $2b$12$GUAxiYTWuNqDEH2Zdg8q2eMiCrkdQ8oJOxSLYcHcxacpd8BLs78Zu
+      password: $2b$12$PHIOAMsc4BlfrUs4DzadveoMu45IoCiwiLdk7PPDeylQedhaUFOCm
 cookie:
-  expiry_days: 0
+  expiry_days: 30
   key: q2eMiCrkdQacpd8
   name: g8q2eQ8oJOb$12$GU
 preauthorized:

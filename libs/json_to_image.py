@@ -43,7 +43,7 @@ def generate_card(heading, content, color='#000000', width=2160, aspect_ratio=(1
 
     # draw page number
     page_number = f'{num}'
-    page_number_width, page_number_height = draw.textsize(page_number, font=body_font)
+    page_number_width, page_number_height = draw.textlength(page_number, font=body_font)
     draw.text((w - margin - page_number_width, h - margin - body_font_size), page_number,
               font=body_font, fill=heading_color)
 
@@ -113,7 +113,7 @@ def generate_info_cards(json_list, pal1=pals2):
 
         # draw page number
         page_number = str(i+1)
-        page_number_width, page_number_height = draw.textsize(page_number, font=hashtag_font)
+        page_number_width, page_number_height = draw.textlength(page_number, font=hashtag_font)
         draw.text((image_width - margin - page_number_width, image_height - margin - hashtag_font_size), page_number,
                   font=hashtag_font, fill="white")
 
@@ -145,7 +145,7 @@ def generate_title_cards(titles, subtitle, topic, text_top_right="@bluestoneai",
         # top right label
 
         text_top_right_font = ImageFont.truetype('assets/BOLD.OTF', int(w/25))
-        text_top_right_width, text_top_right_height = draw.textsize(text_top_right, font=text_top_right_font)
+        text_top_right_width, text_top_right_height = draw.textlength(text_top_right, font=text_top_right_font)
         draw.text((w - margin - text_top_right_width, margin), text_top_right, font=text_top_right_font, fill="white")
 
         # bottom right arrow
@@ -159,7 +159,7 @@ def generate_title_cards(titles, subtitle, topic, text_top_right="@bluestoneai",
         draw.text((margin, h - margin - int(w/25)), '#'+str(topic).lower(), font=text_top_right_font, fill="white")
 
         # right arrows
-        page_number_width, page_number_height = draw.textsize('>>>', font=text_top_right_font)
+        page_number_width, page_number_height = draw.textlength('>>>', font=text_top_right_font)
         draw.text((w - margin - page_number_width, h - margin - int(w/25)), '>>>',
                   font=text_top_right_font, fill="white")
 

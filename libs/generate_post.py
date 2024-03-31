@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 @st.cache_data
 def generate_post(heading, subtitle, content, color='#000000', width=2160, aspect_ratio=(1, 1), hashtag='212',
-                  textcolor='white', heading_color='31BD93', font='Livvic', wrap=20, body_font_size=20,
+                  textcolor='white', heading_color='31BD93', font='Livvic', wrap=18, body_font_size=18,
                   lab='STUDY LAB'):
 
     heading_font_path = glob(f"assets/fonts/{font}/bold*")[0]
@@ -36,8 +36,8 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
 
     # draw headings
     heading_font = ImageFont.truetype(heading_font_path, heading_font_size)
-    heading_lines = textwrap.wrap(heading, width=20)
-    y += int(margin/10)
+    heading_lines = textwrap.wrap(heading, width=15)
+    y += int(margin/12)
     for line in heading_lines:
         with Pilmoji(image) as pilmoji:
             pilmoji.text((margin, y), line, font=heading_font, fill=heading_color)
@@ -57,7 +57,7 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
     # draw logo (bottom right)
     logo_font_size = int(body_font_size*0.75)
     logo_font = ImageFont.truetype(logo_font_path, logo_font_size)
-    logo_width, logo_height = draw.textsize('Johnny\'s', font=logo_font)
+    logo_width, logo_height = draw.textlength('Johnny\'s', font=logo_font), logo_font_size
     draw.text((w - margin - logo_width, h - margin*1.35 - logo_font_size), 'Johnny\'s',
               font=logo_font, fill=heading_color)
 
@@ -66,7 +66,8 @@ def generate_post(heading, subtitle, content, color='#000000', width=2160, aspec
     lab = ' '.join([x for x in lab])
     print(lab)
     lab_font = ImageFont.truetype(logo_font_path2, int(logo_font_size/1.5))
-    lab_width, lab_height = draw.textsize(lab, font=lab_font)
+    lab_width= draw.textlength(lab, font=lab_font)
+    lab_height= int(logo_font_size/1.5)
     draw.text((w - margin - lab_width +20, h - margin * 0.8 - logo_font_size), lab,
               font=lab_font, fill=textcolor)
 
