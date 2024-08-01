@@ -43,3 +43,5 @@ def app():
         c2.error('Add text to summarize')
     summary = query({"inputs": f"{input}"}, API_URL)
     c3.text_area('Output', key='key_output', value=summary[0]['summary_text'], height=250)
+
+

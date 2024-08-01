@@ -33,15 +33,16 @@ def app():
     "title": <appropriate title>, should be catchy, viral and short
     "subtitle": <appropriate subtitle>, SHOULD BE MAX 7 WORDS LONG
     "description": <explanation>, EXPLAIN IN SIMPLE TERMS IN 5 SENTENCES the title of that slide. Use distinct emojis.
+    The length of the list should be {SLIDES + 2}. The second last item in the list should be the caption and should contain 10 additional
+    points about the topic WIHOUT USING ANY HASHTAGS.
+    The last item in the list should be a list at least 25 hashtags separated by comma.
     Use an example or an analogy as appropriate to explain a slide.
     the description MUST explain any technical term in parenthesis whenever used in MAX 7 words.
     DO NOT REPEAT YOURSELF. Do not self-reference. 
     Do not explain what you are doing. Do not explain what you are going to do.
     generate your response in the form of a LIST with each item being a slide.
-    The last two items in the list MUST BE a caption for instagram carousel. The caption should contain 10 additional
-    points about the topic WIHOUT USING ANY HASHTAGS.
-    The list item should a list at least 25 hashtags separated by comma.
-    PLEASE CHECK THE FORMAT FOR JSON OBJECT BEFORE GENERATING A RESPONSE. KEYS MUST BE IN DOUBLE QUOTES
+    THE OUTPUT MUST BE a PYTHON LIST separate by commas.
+    PLEASE CHECK THE FORMAT FOR JSON OBJECT BEFORE GENERATING A RESPONSE. KEYS MUST BE IN DOUBLE QUOTES.
     The topic is #### {TOPIC} ####
     """
 
@@ -54,7 +55,8 @@ def app():
     if TOPIC:
         response_research = get_completion(prompt_research, model=MODEL)
         response_research = json.loads(response_research)
-        # st.write(response_research)
+        st.write(response_research)
+        
         slides = response_research[:-2]
         captions = response_research[-2]
         hashtags = response_research[-1]

@@ -31,7 +31,7 @@ def app():
     MUST explain any technical term in parenthesis whenever used in MAX 7 words.
     DO NOT REPEAT YOURSELF. Do not self-reference. 
     Do not explain what you are doing. Do not explain what you are going to do.
-    Generate a response in the form of JSON format with the following keys
+    THE OUTPUT MUST BE A JSON OBJECT. Use the following keys for the JSON OBJECT
     "title": <appropriate title>, should be catchy, viral and short
     "subtitle": <appropriate subtitle>, SHOULD BE MAX 7 WORDS LONG. MUST be a question
     "description": <explanation>, EXPLAIN IN SIMPLE TERMS IN 5 SENTENCES ABOUT {TOPIC}. NO HASHTAGS. SHOULD CONTAIN

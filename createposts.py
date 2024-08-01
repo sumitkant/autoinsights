@@ -6,7 +6,7 @@ from libs.json_to_image import generate_info_cards, generate_title_cards
 
 
 # Page Layout
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+# st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
 # Headings
 st.title(':rocket: Fragments.ai :rocket:')

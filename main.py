@@ -1,10 +1,10 @@
 import streamlit as st
-import page_aigeneratedcarousel
-import page_manualcarousel
+# import page_aigeneratedcarousel
+# import page_manualcarousel
 import page_instagrampost
 import page_summarizetext
 import page_imagecaption
-import page_imagegeneration
+# import page_imagegeneration
 # import page_pandasai
 # import page_arxiv_summary
 import page_speech_to_text
@@ -44,12 +44,12 @@ if authentication_status:
 
     # PAGES
     PAGES = {
-        "AI Generated Carousel": page_aigeneratedcarousel,
-        "Manual Carousel": page_manualcarousel,
+        # "AI Generated Carousel": page_aigeneratedcarousel,
+        # "Manual Carousel": page_manualcarousel,
         "AI Instagram Post": page_instagrampost,
         "Text Summarization": page_summarizetext,
         "Image Captioning": page_imagecaption,
-        "Image Generation": page_imagegeneration,
+        # "Image Generation": page_imagegeneration,
         # "PandasAI": page_pandasai,
         "Text to Speech": page_speech_to_text,
         # "ArXiv Paper Summary": page_arxiv_summary
