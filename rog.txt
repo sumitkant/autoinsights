@@ -1,0 +1,15 @@
+streamlit
+openai
+Pilmoji
+streamlit-authenticator
+transformers
+langchain
+openai-whisper
+yt_dlp
+pydub
+numpy
+pandas
+arxiv
+pymupdf
+pandasai
+BeautifulSoup4
